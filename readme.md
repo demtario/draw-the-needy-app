@@ -40,7 +40,7 @@ You have to do simmilar thing with a `needies.json.example` file. In it, you nee
 ["John Smith", "Mike Kowalsky", "Joshua Wolf"]
 ```
 
-## Sending mails
+## Running the script
 
 If you prepared all data, you can simply run a script using:
 
@@ -48,6 +48,14 @@ If you prepared all data, you can simply run a script using:
 $ yarn start
 or
 $ npm run start
+```
+
+You may not always want to send emails to the receivers. Thankfully, you can perform a test run using following command:
+
+```bash
+$ yarn debug
+or
+$ npm run debug
 ```
 
 ## Advanced use case
