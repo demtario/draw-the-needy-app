@@ -32,7 +32,7 @@ const main = async (): Promise<void> => {
     to: await getEmailTarget(),
     subject: `🥳 ${generatedNeedy.name} is a Needy of the following week!`,
     content: `
-      <h1>Greeting fellow friend!</h1>
+      <h1>Greetings fellow friend!</h1>
       <p>🥳 &nbsp;<b>${generatedNeedy.name}</b> is a Needy of the following week!</p>
       <p>See ya next time!</p>
       <hr />
