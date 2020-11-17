@@ -4,6 +4,10 @@
 
 App for the **D.A. Górka**, to generate a "choosen Needy" for given week.
 
+## Requirements
+
+[Node](https://nodejs.org/en/) in minimal version of `10.x`
+
 ## Preparation
 
 Clone the repo and install dependencies.
