@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import { createMailer, sendEmail } from './services/mailer'
 import { getRandomNeedy } from './services/needies'
 import { getState, saveGeneratedNeedyToState } from './services/state'
-import { getEmailTarget } from './services/targetsEmails'
+import { getEmailTargets } from './services/emailTargets'
 
 require('dotenv').config()
 
@@ -29,7 +29,7 @@ const main = async (): Promise<void> => {
   const mailer = createMailer(process.env.MAIL_USERNAME, process.env.MAIL_PASSWORD)
   sendEmail(mailer)({
     from: `DrawTheNeedyApp <${process.env.MAIL_USERNAME}>`,
-    to: await getEmailTarget(),
+    to: await getEmailTargets(),
     subject: `🥳 ${generatedNeedy.name} is a Needy of the following week!`,
     content: `
       <h1>Greetings fellow friend!</h1>
