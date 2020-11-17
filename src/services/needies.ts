@@ -4,7 +4,7 @@ import { weeksToMilisecs } from '../helpers/weeksToMilisecs'
 
 import { GeneratedNeedy, Needy } from '../interfaces/Needy'
 import { State } from '../interfaces/State'
-import { getRandomFromArray } from './random'
+import { getRandomFromArray } from '../helpers/random'
 
 const readFile = util.promisify(fs.readFile)
 
