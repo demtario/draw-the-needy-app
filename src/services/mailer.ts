@@ -1,26 +1,34 @@
-import nodemailer, { Transporter } from 'nodemailer'
+import { createTransport, Transporter } from 'nodemailer'
 
-interface Email {
+interface EmailParams {
   from: string
   to: string
   subject: string
   content: string
 }
 
-export const createMailer = (email: string, password: string): Transporter =>
-  nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: email,
-      pass: password,
-    },
-  })
+class Mailer {
+  transporter: Transporter
 
-export const sendEmail = (mailer: Transporter) => async (email: Email): Promise<void> =>
-  mailer.sendMail({
-    from: email.from,
-    to: email.to,
-    subject: email.subject,
-    text: email.content,
-    html: email.content,
-  })
+  constructor(email: string, password: string, service: string = 'gmail') {
+    this.transporter = createTransport({
+      service,
+      auth: {
+        user: email,
+        pass: password,
+      },
+    })
+  }
+
+  sendMail(email: EmailParams): Promise<void> {
+    return this.transporter.sendMail({
+      from: email.from,
+      to: email.to,
+      subject: email.subject,
+      text: email.content,
+      html: email.content,
+    })
+  }
+}
+
+export const createMailer = (email: string, password: string) => new Mailer(email, password)
