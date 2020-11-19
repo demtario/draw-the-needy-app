@@ -5,7 +5,7 @@ import { getRandomNeedy } from './services/needies'
 import { getState, saveGeneratedNeedyToState } from './services/state'
 import { getEmailTargets } from './services/emailTargets'
 
-require('dotenv').config()
+require('dotenv-defaults').config()
 
 const main = async (): Promise<void> => {
   if (process.env.DEBUG) {
@@ -13,6 +13,10 @@ const main = async (): Promise<void> => {
       chalk.bold(chalk.red('App started in debug mode!')),
       "No email will be sent, and generated Needy won't be saved to DB"
     )
+  }
+
+  if (!process.env.MAIL_USERNAME || !process.env.MAIL_PASSWORD) {
+    throw new Error('Please enter Gmail credentials into env file!')
   }
 
   const state = await getState()
