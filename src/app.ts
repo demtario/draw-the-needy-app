@@ -1,11 +1,10 @@
 import chalk from 'chalk'
+import 'dotenv-defaults/config'
 
 import { createMailer, sendEmail } from './services/mailer'
 import { getRandomNeedy } from './services/needies'
 import { getState, saveGeneratedNeedyToState } from './services/state'
 import { getEmailTargets } from './services/emailTargets'
-
-require('dotenv-defaults').config()
 
 const main = async (): Promise<void> => {
   if (process.env.DEBUG) {
@@ -43,7 +42,7 @@ const main = async (): Promise<void> => {
       <small>This email was sent to you, because Jan Tobolewski added your email to this notification, contact him if you don't want to hear about it</small>
       `,
   })
-  console.log(chalk.blue('Email was sent!'))
+  console.log(chalk.blue('Emails were sent!'))
 
   await saveGeneratedNeedyToState(state, generatedNeedy)
 }
