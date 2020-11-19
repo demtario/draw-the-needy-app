@@ -44,4 +44,9 @@ const main = async (): Promise<void> => {
   await saveGeneratedNeedyToState(state, generatedNeedy)
 }
 
-main()
+const handleError = (error: Error) => {
+  console.log(chalk.red('An error occured!'))
+  console.log(process.env.DEBUG ? error.stack : error.message)
+}
+
+main().catch(handleError)
