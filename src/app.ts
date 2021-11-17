@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import os from 'os'
 import 'dotenv-defaults/config'
 
 import { createMailer } from './services/mailer'
@@ -29,8 +30,11 @@ const main = async (): Promise<void> => {
 
   if (process.env.DEBUG) return
 
+  const machineUsername = os.userInfo().username
+
   const mailer = createMailer(process.env.MAIL_USERNAME, process.env.MAIL_PASSWORD)
-  mailer.sendMail({
+
+  await mailer.sendMail({
     from: `DrawTheNeedyApp <${process.env.MAIL_USERNAME}>`,
     to: await getEmailTargets(),
     subject: `🥳 ${generatedNeedy.name} is a Needy of the following week!`,
@@ -39,9 +43,10 @@ const main = async (): Promise<void> => {
       <p>🥳 &nbsp;<b>${generatedNeedy.name}</b> is a Needy of the following week!</p>
       <p>See ya next time!</p>
       <hr />
-      <small>This email was sent to you, because Jan Tobolewski added your email to this notification, contact him if you don't want to hear about it</small>
+      <small>This email was sent to you, because <b>${machineUsername}</b> added your email to this notification, contact him if you don't want to hear about it</small>
       `,
   })
+
   console.log(chalk.blue('Emails were sent!'))
 
   await saveGeneratedNeedyToState(state, generatedNeedy)
